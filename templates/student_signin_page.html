@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Club sign in</title>
+</head>
+<body>
+{% load static %}
+<center><img src="{% static 'logo.png' %}" alt="Hi!" /></center>
+<form action="{{ HOSTNAME }}/api/student_signin/" method="post">
+    cookies:&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="cookies" style="width:80%;"><br>
+    <button type="submit">sign in</button>
+
+</form>
+</body>
+</html>

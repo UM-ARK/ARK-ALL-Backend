@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>upload club info</title>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!--    id:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="id" style="width:80%;" id="id"><br>-->
+    intro:&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="intro" style="width:80%;" id="intro"><br>
+    contact:<input type="text" name="contact" style="width:80%;" id="contact"><br>
+<!--    大頭貼:<input type="file" name="logo_img" id="logo_img" ><br><br>-->
+    <label for="add_club_photos">請選擇學會照片:</label><br>
+        <input type="file" name="add_club_photos" id="add_club_photos" multiple><br><br>
+    <label for="del_club_photos">請填寫要刪除的學會照片:</label><br>
+    <input type="text" name="del_club_photos" style="width:80%;" id="del_club_photos"><br><br>
+
+    <button type="submit" id="submitButton">submit</button>
+
+    <p>
+
+    </p>
+
+    <script>
+    $('#submitButton').on('click',function(){
+
+            let fd = new FormData();
+            let add_club_photos = $('#add_club_photos')[0].files;
+
+            // Check file selected or not
+            //if(files.length > 0 ){
+                //fd.append('file',files[0]);
+
+            for (var i = 0; i < add_club_photos.length; i++) {
+                console.log(i);
+                fd.append("add_club_photos", add_club_photos[i]);
+            }
+                fd.append('del_club_photos',$("#del_club_photos").val() + "");
+                fd.append('id',$("#id").val() + "");
+                fd.append('intro',$("#intro").val() + "");
+                fd.append('contact',$("#contact").val() + "");
+
+
+
+                $.ajax({
+                  url: "{{ HOSTNAME }}/api/edit_club_info/",
+                  type: 'POST',
+                  data:fd,
+                  contentType: false,
+                  processData: false,
+                  success: function (data, status, xhr) {// success callback function
+                    $("p").prepend("return:"+JSON.stringify(data)+"<br><br>");
+                  }
+                })
+            //}
+    });
+    //          $("p").prepend("xhr:"+JSON.stringify(xhr)+"<br><br>");
+    //          $("p").prepend("status:"+status+"<br>");
+    </script>
+
+
+</body>
+</html>

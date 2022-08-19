@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>update club photo</title>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+    title:<input type="text" name="title" id="title"><br>
+    type:
+    <select name="type" id="type">
+        <option value="N/A">N/A</option>
+        <option value="ACTIVITY">ACTIVITY</option>
+        <option value="OFFICIAL">OFFICIAL</option>
+        <option value="WEBSITE">WEBSITE</option>
+    </select><br>
+    link:<input type="text" name="link" id="link"><br>
+    start datetime:<input type="datetime-local" name="startdatetime" id="startdatetime"><br>
+    end datetime:<input type="datetime-local" name="enddatetime" id="enddatetime"><br>
+    location:<input type="text" name="location" id="location"><br>
+    introduction:<input type="text" name="introduction" id="introduction"><br>
+    can_follow<input type="text" name="can_follow" id="can_follow"><br>
+
+    <label for="cover_image_file">請選擇活動封面照片:</label><br>
+        <input type="file" name="cover_image_file" id="cover_image_file"><br><br>
+
+    <label for="relate_image_file">請選擇活動照片:</label><br>
+        <input type="file" name="relate_image_file" id="relate_image_file" multiple><br><br>
+    <button type="submit" id="submitButton">submit</button>
+
+    <p></p>
+
+    <script>
+    $('#submitButton').on('click',function(){
+
+            let fd = new FormData();
+            let title = $('#title').val();
+            let type = $('#type').val();
+            let link = $('#link').val();
+            let startdatetime =$('#startdatetime').val();
+            let enddatetime =$('#enddatetime').val();
+            let location = $('#location').val();
+            let introduction = $('#introduction').val();
+            let can_follow = $('#can_follow').val();
+
+            fd.append("title", title);
+            fd.append("type", type);
+            fd.append("link", link);
+            fd.append("startdatetime", startdatetime);
+            fd.append("enddatetime", enddatetime);
+            fd.append("location",location );
+            fd.append("introduction",introduction );
+            fd.append("can_follow",can_follow );
+
+
+            let cover_image_file = $('#cover_image_file')[0].files[0];
+            fd.append("cover_image_file", cover_image_file);
+
+            let relate_image_file = $('#relate_image_file')[0].files;
+            //files.length can set limited
+            //for (var i = 0; i < 9; i++) {
+            for (var i = 0; i < relate_image_file.length; i++) {
+                fd.append("add_relate_image", relate_image_file[i]);
+            }
+                $.ajax({
+                  url: '{{ HOSTNAME }}/api/create_activity/',
+                  type: 'POST',
+                  data:fd,
+                  contentType: false,
+                  processData: false,
+                  success: function (data, status, xhr) {// success callback function
+                    $("p").prepend("return:"+JSON.stringify(data)+"<br><br>");
+                  }
+                })
+    });
+
+    </script>
+
+</body>
+</html>

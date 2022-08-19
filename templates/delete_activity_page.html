@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>delete_activity_page</title>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+    <label for="id">活動ID:</label><br>
+        <input type="text" name="id" style="width:80%;" id="id"><br><br>
+    <button type="submit" id="submitButton">submit</button>
+
+    <p></p>
+
+    <script>
+    $('#submitButton').on('click',function(){
+
+            let fd = new FormData();
+            let id = $('#id').val();
+
+                fd.append("id", id);
+
+                $.ajax({
+                  url: "{{ HOSTNAME }}/api/delete_activity/",
+                  type: 'POST',
+                  data:fd,
+                  contentType: false,
+                  processData: false,
+                  success: function (data, status, xhr) {// success callback function
+                    $("p").prepend("return:"+JSON.stringify(data)+"<br><br>");
+                  }
+                })
+    });
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>upload image</title>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+<form action="{{ HOSTNAME }}/api/upload_image_test/" method="post" enctype="multipart/form-data">
+    <input type="text" name="id" id="id">
+    <label for="user_image">大頭貼:</label><br>
+        <input type="file" name="user_image" id="user_image" multiple><br><br>
+    <button type="submit" id="submitButton">submit</button>
+</form>
+
+</body>
+</html>

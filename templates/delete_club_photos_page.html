@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>delete club photo</title>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+    <label for="club_photos">請選擇學會照片:</label><br>
+        <input type="text" name="club_photos" style="width:80%;" id="club_photos"><br><br>
+    <button type="submit" id="submitButton">submit</button>
+
+    <p></p>
+
+    <script>
+    $('#submitButton').on('click',function(){
+
+            let fd = new FormData();
+            let files = $('#club_photos').val();
+
+                fd.append("file", files);
+
+                $.ajax({
+                  url: "{{ HOSTNAME }}/api/delete_club_photos/",
+                  type: 'POST',
+                  data:fd,
+                  contentType: false,
+                  processData: false,
+                  success: function (data, status, xhr) {// success callback function
+                    $("p").prepend("return:"+JSON.stringify(data)+"<br><br>");
+                  }
+                })
+    });
+
+    </script>
+
+</body>
+</html>

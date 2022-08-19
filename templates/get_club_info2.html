@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>update activity info</title>
+</head>
+<body>
+
+
+
+    <button type="submit" id="submitButton" onclick="loadDoc()">submit</button>
+    <div id="demo"></div>
+    <p>
+
+    </p>
+
+    <script>
+    function loadDoc() {
+          const xhttp = new XMLHttpRequest();
+          xhttp.onload = function() {
+            document.getElementById("demo").innerHTML = this.responseText;
+            }
+          xhttp.open("GET", "/api/get_club_info/all/", true);
+          xhttp.send();
+    }
+    //          $("p").prepend("xhr:"+JSON.stringify(xhr)+"<br><br>");
+    //          $("p").prepend("status:"+status+"<br>");
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register club</title>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+<form action="{{ HOSTNAME }}/api/club_signup/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    account:
+    <input type="text" name="account" style="width:80%;" id="account"><br>
+    password:
+    <input type="text" name="password" id="password"><br>
+    name:
+    <input type="text" name="name" id="name"><br>
+    tag:
+    <select name="tag" id="tag">
+        <option value="N/A">N/A</option>
+        <option value="SA">SA</option>
+        <option value="CLUB">CLUB</option>
+        <option value="SOCIETY">SOCIETY</option>
+        <option value="COLLEGE">COLLEGE</option>
+        <option value="OFFICIAL">OFFICIAL</option>
+        <option value="MEDIA">MEDIA</option>
+        <option value="BUSINESS">BUSINESS</option>
+    </select><br>
+
+    <label for="logo">請選擇logo:</label><br>
+        <input type="file" name="logo" id="logo"><br>
+    <label for="token">token: </label><input type="text" name="token" id="token"><br>
+    <button type="submit">sign up</button>
+</form>
+
+
+
+</body>
+</html>

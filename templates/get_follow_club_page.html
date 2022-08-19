@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>update activity info</title>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+
+    role:<input type="text" name="role" style="width:80%;" id="role"><br>
+    <button type="submit" id="submitButton">submit</button>
+
+    <p>
+
+    </p>
+
+    <script>
+    $('#submitButton').on('click',function(){
+
+            let role = $('#role').val();
+
+            let fd = new FormData();
+            fd.append("role", role);
+
+
+
+                $.ajax({
+                  url: "{{ HOSTNAME }}/api/get_follow_club/",
+                  type: 'POST',
+                  data:fd,
+                  contentType: false,
+                  processData: false,
+                  success: function (data, status, xhr) {// success callback function
+                    $("p").prepend("return:"+JSON.stringify(data)+"<br><br>");
+                  }
+                })
+            //}
+    });
+    //          $("p").prepend("xhr:"+JSON.stringify(xhr)+"<br><br>");
+    //          $("p").prepend("status:"+status+"<br>");
+    </script>
+
+
+</body>
+</html>
